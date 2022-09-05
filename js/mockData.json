@@ -1,0 +1,82 @@
+[
+    {
+       "id":"1",
+       "userName":"Александр Антонов",
+       "selected":false,
+       "archived":true,
+       "text":"здравствуйте. как долго придется ждать нож который",
+       "date":"13/04/2018",
+       "time":"14:02",
+       "read":true
+    },
+    {
+       "id":"2",
+       "userName":"Gun Machine",
+       "selected":false,
+       "archived":false,
+       "text":"а почему на ноже нет ни одной царапины?",
+       "date":"01/12/2018",
+       "time":"00:14",
+       "read":true
+    },
+    {
+       "id":"3",
+       "userName":"Диана Павлова",
+       "selected":false,
+       "archived":false,
+       "text":"нет, мне не нужно. если и вам тоже пофиг, то выбросьте",
+       "date":"13/04/2018",
+       "time":"14:02",
+       "read":true
+    },
+    {
+       "id":"4",
+       "userName":"Otto Zweig",
+       "selected":false,
+       "archived":false,
+       "text":"thank you!  that’s great!",
+       "date":"01/12/2018",
+       "time":"00:14",
+       "read":true
+    },
+    {
+       "id":"5",
+       "userName":"Александр Антонов",
+       "selected":false,
+       "archived":true,
+       "text":"здравствуйте. как долго придется ждать нож который",
+       "date":"13/04/2018",
+       "time":"14:02",
+       "read":true
+    },
+    {
+       "id":"6",
+       "userName":"Gun Machine",
+       "selected":false,
+       "archived":false,
+       "text":"а почему на ноже нет ни одной царапины?",
+       "date":"01/12/2018",
+       "time":"00:14",
+       "read":false
+    },
+    {
+       "id":"7",
+       "userName":"Диана Павлова",
+       "selected":false,
+       "archived":false,
+       "text":"нет, мне не нужно. если и вам тоже пофиг, то выбросьте",
+       "date":"13/04/2018",
+       "time":"14:02",
+       "read":true
+    },
+    {
+       "id":"8",
+       "userName":"Otto Zweig",
+       "selected":false,
+       "archived":false,
+       "text":"thank you!  that’s great!",
+       "date":"01/12/2018",
+       "time":"00:14",
+       "read":false
+    }
+]
