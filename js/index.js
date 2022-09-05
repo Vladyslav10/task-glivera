@@ -2,14 +2,6 @@
   const mainLink = document.querySelector(".menu__link-mes");
   const back = document.querySelector('.main__back');
 
-  window.onresize = function() {
-    const w = window.innerWidth;
-    if(w > 767){
-      mainLink.classList.add("active");
-    } mainLink.classList.remove("active");
-
-  }
-
   mainLink.addEventListener('click', function(){
     const w = window.innerWidth;
     if(w < 768){
@@ -42,24 +34,112 @@
 
 ///////////////////////////////BODY//////////////////////////////////////////////////////////////
 
-(async function () {
+(function () {
+  const data = [
+    {
+      id: "1",
+      userName: "Александр Антонов",
+      selected: false,
+      archived: true,
+      text: "здравствуйте. как долго придется ждать нож который",
+      date: "13/04/2018",
+      time: "14:02",
+      read: true
+    },
+    {
+      id: "2",
+      userName: "Gun Machine",
+      selected: false,
+      archived: false,
+      text: "а почему на ноже нет ни одной царапины?",
+      date: "01/12/2018",
+      time: "00:14",
+      read: true
+    },
+    {
+      id: "3",
+      userName: "Диана Павлова",
+      selected: false,
+      archived: false,
+      text: "нет, мне не нужно. если и вам тоже пофиг, то выбросьте",
+      date: "13/04/2018",
+      time: "14:02",
+      read: true
+    },
+    {
+      id: "4",
+      userName: "Otto Zweig",
+      selected: false,
+      archived: false,
+      text: "thank you!  that’s great!",
+      date: "01/12/2018",
+      time: "00:14",
+      read: true
+    },
+    {
+      id: "5",
+      userName: "Александр Антонов",
+      selected: false,
+      archived: true,
+      text: "здравствуйте. как долго придется ждать нож который",
+      date: "13/04/2018",
+      time: "14:02",
+      read: true
+    },
+    {
+      id: "6",
+      userName: "Gun Machine",
+      selected: false,
+      archived: false,
+      text: "а почему на ноже нет ни одной царапины?",
+      date: "01/12/2018",
+      time: "00:14",
+      read: false
+    },
+    {
+      id: "7",
+      userName: "Диана Павлова",
+      selected: false,
+      archived: false,
+      text: "нет, мне не нужно. если и вам тоже пофиг, то выбросьте",
+      date: "13/04/2018",
+      time: "14:02",
+      read: true
+    },
+    {
+      id: "8",
+      userName: "Otto Zweig",
+      selected: false,
+      archived: false,
+      text: "thank you!  that’s great!",
+      date: "01/12/2018",
+      time: "00:14",
+      read: false
+    }
+  ]
   const bodyBlock = document.querySelector(".body-main");
   const deleteMes = document.getElementById("delete");
   const archiveMes = document.getElementById("toarchive");
   const unreaded = document.getElementById("unread");
   const archive = document.getElementById("archive");
+  const count = document.querySelector(".menu__link-mes-count");
 
-  const response = await fetch("../mockData.json");
-  const data = await response.json();
-
-  if (response.ok) {
-    bodyBlock.innerHTML = ``;
-    getMessages(data);
-  } else {
-    bodyBlock.innerHTML = response.statusText();
+  function changeCount() {
+    let unreadMes = 0;
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index];
+      if(element.read === false) {
+        unreadMes ++;
+      }
+    }
+    count.innerText = `${unreadMes}`;
   }
+  changeCount();
+  
+  getMessages(data);
 
   function getMessages(items) {
+    bodyBlock.innerHTML = ``
     for (const el of items) {
       bodyBlock.innerHTML += `
           <div id=${el.id} class="body-main__row">
