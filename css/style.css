@@ -383,6 +383,7 @@
   height: 25px;
   text-align: center;
   position: relative;
+  cursor: pointer;
 }
 
 .bottom-main__pagination-element:not(:last-child) {

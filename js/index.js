@@ -49,7 +49,7 @@
   const unreaded = document.getElementById("unread");
   const archive = document.getElementById("archive");
 
-  const response = await fetch("../js/mockData.json");
+  const response = await fetch("../mockData.json");
   const data = await response.json();
 
   if (response.ok) {

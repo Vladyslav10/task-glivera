@@ -323,6 +323,7 @@
         height: 25px;
         text-align: center;
         position: relative;
+        cursor: pointer;
         &:not(:last-child){
             margin: 0px 8px 0px 0px;
         }
