@@ -371,9 +371,9 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   padding: 6px 0px;
   max-width: 459px;
   margin: 0px 0px 0px auto;
@@ -385,10 +385,8 @@
   display: flex;
 }
 
-.bottom-main__pagination > .botom-main__dots {
+.bottom-main__pagination > * {
   margin: 0px 8px 0px 0px;
-  -ms-flex-item-align: end;
-      align-self: flex-end;
 }
 
 .bottom-main__pagination-element {
@@ -405,11 +403,6 @@
   height: 25px;
   text-align: center;
   position: relative;
-  cursor: pointer;
-}
-
-.bottom-main__pagination-element:not(:last-child) {
-  margin: 0px 8px 0px 0px;
 }
 
 .bottom-main__pagination-element.active {
@@ -417,15 +410,13 @@
   border: 1px solid #db9351;
 }
 
-.bottom-main__pagination-element:last-child {
-  margin: 0px 0px 0px 10px;
+.bottom-main__dots {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
-.bottom-main__pagination-element:last-child::before {
-  content: '...';
-  position: absolute;
-  top: 6px;
-  left: -18px;
+.bottom-main__image {
+  cursor: pointer;
 }
 
 @media (max-width: 1024px) {
@@ -511,7 +502,7 @@
 @media (max-width: 767.98px) {
   .aside {
     margin: 20px 15px;
-    position: fixed;
+    position: relative;
     top: 0px;
     left: 0px;
     -webkit-box-flex: 0;
@@ -525,6 +516,7 @@
   }
   .main {
     padding: 20px 15px;
+    overflow: auto;
     position: fixed;
     width: 100%;
     height: 100%;
@@ -607,28 +599,13 @@
     display: none;
   }
   .bottom-main__row {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     padding: 6px 0px;
-    max-width: 459px;
-    margin: 0px auto;
-  }
-  .bottom-main__pagination {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  }
-  .bottom-main__pagination > .botom-main__dots {
-    margin: 0px 8px 0px 0px;
-    -ms-flex-item-align: end;
-        align-self: flex-end;
   }
   .bottom-main__pagination-element {
     width: 20px;
@@ -637,16 +614,8 @@
   .bottom-main__pagination-element:not(:last-child) {
     margin: 0px 5px 0px 0px;
   }
-  .bottom-main__pagination-element:last-child {
-    margin: 0px 0px 0px 10px;
-  }
-  .bottom-main__pagination-element:last-child::before {
-    content: '...';
-    position: absolute;
-    top: 6px;
-    left: -15px;
-  }
-  .bottom-main__image {
-    display: none;
+  .bottom-main__image svg {
+    width: 30px;
+    height: 17px;
   }
 }

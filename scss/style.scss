@@ -316,7 +316,7 @@
     &__row {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-end;
         padding: 6px 0px;
         max-width: 459px;
         margin: 0px 0px 0px auto;
@@ -324,9 +324,8 @@
     
     &__pagination {
         display: flex;
-        & > .botom-main__dots {
+        & > * {
             margin: 0px 8px 0px 0px;
-            align-self: flex-end;
         }
     }
 
@@ -338,24 +337,18 @@
         height: 25px;
         text-align: center;
         position: relative;
-        cursor: pointer;
-        &:not(:last-child){
-            margin: 0px 8px 0px 0px;
-        }
         &.active {
             border-radius: 50%;
             border: 1px solid #db9351;
         }
+    }
 
-        &:last-child {
-            margin: 0px 0px 0px 10px;
-            &::before{
-                content:'...';
-                position: absolute;
-                top: 6px;
-                left: -18px;
-            }
-        }
+    &__dots {
+        align-self: flex-end;
+    }
+
+    &__image {
+        cursor: pointer;
     }
 
 }
@@ -471,7 +464,7 @@
 @media (max-width: 767.98px){
     .aside {
         margin: 20px 15px;
-        position: fixed;
+        position: relative;
         top: 0px;
         left: 0px;
         flex: 0 0 35%;
@@ -483,6 +476,7 @@
 
     .main {
         padding: 20px 15px;
+        overflow: auto;
         position: fixed;
         width: 100%;
         height: 100%;
@@ -589,20 +583,9 @@
     .bottom-main {
 
         &__row {
-            display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             padding: 6px 0px;
-            max-width: 459px;
-            margin: 0px auto;
-        }
-        
-        &__pagination {
-            display: flex;
-            & > .botom-main__dots {
-                margin: 0px 8px 0px 0px;
-                align-self: flex-end;
-            }
         }
     
         &__pagination-element {
@@ -611,22 +594,11 @@
             &:not(:last-child){
                 margin: 0px 5px 0px 0px;
             }
-    
-            &:last-child {
-                margin: 0px 0px 0px 10px;
-                &::before{
-                    content:'...';
-                    position: absolute;
-                    top: 6px;
-                    left: -15px;
-                }
-            }
         }
 
-        &__image {
-            display: none;
+        &__image svg  {
+            width: 30px;
+            height: 17px;
         }
-    
     }
-    
 }
