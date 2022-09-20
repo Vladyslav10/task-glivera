@@ -237,7 +237,7 @@
 
     deleteMes.addEventListener("click",  function () {
       bodyBlock.innerHTML = ``;
-      users.filter((item) => item.selected === false)
+      users = users.filter((item) => item.selected === false)
       getMessages(users);
       archiveCheck();
       messagesCheck();
