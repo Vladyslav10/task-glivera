@@ -123,16 +123,42 @@
   const unreaded = document.getElementById("unread");
   const archive = document.getElementById("archive");
   const count = document.querySelector(".menu__link-mes-count");
+  const input = document.querySelector(".input__search");
   let selected = false;
   let users = [...data];
-  /* searching
-  const input = document.querySelector(".input__search");
+  
+  
   input.addEventListener('keyup', function(e) {
-      if(e.keyCode === 13) {
-        let arr = [...users].filter(el => el.userName.toLowerCase().includes(input.value.toLowerCase()))
-        getMessages(arr);
+    const inputValue = input.value.toLowerCase();
+      if(inputValue === '') {
+        bodyBlock.addEventListener("click", setSelected);
+        selected = false;
+        deleteMes.classList.remove("hidden");
+        getMessages(users);
+        document
+          .querySelectorAll(".body-main__row")
+          .forEach((el) => el.classList.remove("hidden-input"));
+        messagesCheck();
+        archiveCheck();
+        selectCheck()
+      } else {
+        let arr = [...users].filter(el => el.userName.toLowerCase().includes(inputValue));
+        if(arr.length === 0) {
+          bodyBlock.innerHTML =`<div class="body-main__alert">Чатов нет</div>`
+        } else {
+          selected = true;
+          deleteMes.classList.add("hidden");
+          bodyBlock.removeEventListener("click", setSelected);
+          getMessages(arr);
+          document
+            .querySelectorAll(".body-main__row")
+            .forEach((el) => el.classList.add("hidden-input"));
+          messagesCheck();
+          archiveCheck();
+          selectCheck()
+        }
       }
-  });*/
+  });
 
   function setSelected(e) {
     const curEl = e.target.closest(".body-main__row");
@@ -273,17 +299,23 @@
         el.classList.remove("hidden-input");
       }
     });
-    users
+    let pos =[];
+    const id = users
       .filter((el) => el.selected === true)
-      .map((el) => el.id)
-      .map((item) => {
-        if (users[item - 1].archived === false) {
-          users[item - 1].archived = true;
-          users[item - 1].selected = false;
-        } else {
-          users[item - 1].selected = false;
-        }
-      });
+      .map((el) => el.id);
+    for (let index = 0; index < id.length; index++) {
+      const element = id[index];
+      const idx = users.findIndex(el => el.id === element);
+      pos.push(idx);
+    };
+    pos.map((item) => {
+      if (users[item].archived === false) {
+        users[item].archived = true;
+        users[item].selected = false;
+      } else {
+        users[item].selected = false;
+      }
+    });
     getMessages(users);
     archiveCheck();
     messagesCheck();
