@@ -197,6 +197,10 @@
   transition: all 0.3s ease 0s;
 }
 
+#delete.hidden {
+  display: none;
+}
+
 #toarchive {
   -webkit-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
@@ -241,6 +245,12 @@
   padding: 0px 0px 57px 0px;
 }
 
+.body-main__alert {
+  text-align: center;
+  margin: 30px 0px;
+  font-size: 24px;
+}
+
 .body-main__loading {
   width: 50px;
   height: 50px;
@@ -275,6 +285,10 @@
 
 .body-main__row:hover::after {
   background-color: black;
+}
+
+.body-main__row.hidden-input > .body-main__check {
+  display: none;
 }
 
 .body-main__row.active > .body-main__check > .checked-area::after {

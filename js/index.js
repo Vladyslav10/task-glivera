@@ -134,12 +134,23 @@
       }
   });*/
 
+  function setSelected(e) {
+    const curEl = e.target.closest(".body-main__row");
+    curEl.classList.toggle("active");
+    const curElId = curEl.id;
+    const idx = users.findIndex(el => el.id === curElId);
+    if (curEl.classList.contains("active")) {
+      users[idx].selected = true;
+    } else {
+      users[idx].selected = false;
+    }
+  }
 
   function selectCheck() {
-    if(selected) {
-      archiveMes.innerText = 'Bсе';
+    if (selected) {
+      archiveMes.innerText = "Bсе";
     } else {
-      archiveMes.innerText = 'Добавить в архив';
+      archiveMes.innerText = "Добавить в архив";
     }
   }
 
@@ -207,63 +218,77 @@
 
   unreaded.addEventListener("click", function () {
     selected = true;
+    deleteMes.classList.add("hidden");
+    bodyBlock.removeEventListener("click", setSelected);
     let arr = [...users].filter((el) => el.read === false);
-    bodyBlock.innerHTML = ``;
-    getMessages(arr);
+    if(arr.length === 0) {
+      bodyBlock.innerHTML =`<div class="body-main__alert">Чатов нет</div>`
+    } else {
+      getMessages(arr);
+    }
+    document
+      .querySelectorAll(".body-main__row")
+      .forEach((el) => el.classList.add("hidden-input"));
     archiveCheck();
     messagesCheck();
     selectCheck();
   });
-
   archive.addEventListener("click", function () {
     selected = true;
+    deleteMes.classList.add("hidden");
+    bodyBlock.removeEventListener("click", setSelected);
     let arr = [...users].filter((el) => el.archived === true);
-    bodyBlock.innerHTML = ``;
-    getMessages(arr);
+    if(arr.length === 0) {
+      bodyBlock.innerHTML =`<div class="body-main__alert">Чатов нет</div>`
+    } else {
+      getMessages(arr);
+    }
+    document
+      .querySelectorAll(".body-main__row")
+      .forEach((el) => el.classList.add("hidden-input"));
     archiveCheck();
     messagesCheck();
     selectCheck();
   });
 
-  bodyBlock.addEventListener("click", function (e) {
-    const curEl = e.target.closest(".body-main__row");
-    curEl.classList.toggle("active");
-    const curElId = curEl.id;
-    if (curEl.classList.contains("active")) {
-      users[curElId - 1].selected = true;
+  bodyBlock.addEventListener("click", setSelected);
+
+  deleteMes.addEventListener("click", function () {
+    users = users.filter((item) => item.selected === false);
+    if(users.length === 0) {
+      bodyBlock.innerHTML =`<div class="body-main__alert">Чатов нет</div>`
     } else {
-      users[curElId - 1].selected = false;
+      getMessages(users);
     }
-
-    deleteMes.addEventListener("click",  function () {
-      bodyBlock.innerHTML = ``;
-      users = users.filter((item) => item.selected === false)
-      getMessages(users);
-      archiveCheck();
-      messagesCheck();
-    });
-
-    archiveMes.addEventListener("click", function () {
-      selected = false;
-      users
-        .filter((el) => el.selected === true)
-        .map((el) => el.id)
-        .map((item) => {
-          if (users[item - 1].archived === false) {
-            users[item - 1].archived = true;
-            users[item - 1].selected = false;
-          } else {
-            users[item - 1].selected = false;
-          }
-        });
-      bodyBlock.innerHTML = ``;
-      getMessages(users);
-      archiveCheck();
-      messagesCheck();
-      selectCheck();
-    });
+    archiveCheck();
+    messagesCheck();
   });
-  
+
+  archiveMes.addEventListener("click", function () {
+    selected = false;
+    bodyBlock.addEventListener("click", setSelected);
+    deleteMes.classList.remove("hidden");
+    document.querySelectorAll(".body-main__row").forEach((el) => {
+      if (el.classList.contains("hidden-input")) {
+        el.classList.remove("hidden-input");
+      }
+    });
+    users
+      .filter((el) => el.selected === true)
+      .map((el) => el.id)
+      .map((item) => {
+        if (users[item - 1].archived === false) {
+          users[item - 1].archived = true;
+          users[item - 1].selected = false;
+        } else {
+          users[item - 1].selected = false;
+        }
+      });
+    getMessages(users);
+    archiveCheck();
+    messagesCheck();
+    selectCheck();
+  });
 
   window.onunload = function () {
     localStorage.removeItem("name");
@@ -352,11 +377,20 @@
 /////////////////////MODAL WINDOW/////////////////////////////////
 (function () {
   const body = document.querySelector("body");
+  const linkArea = document.querySelector(".aside__buy");
   const popupLinks = document.querySelectorAll(".popup-link");
   const popupCloseIcon = document.querySelectorAll(".close-popup");
   const lockPadding = document.querySelectorAll(".lock-padding");
   let unlock = true;
   const timeout = 800;
+
+  linkArea.addEventListener("click", function (e) {
+    const popupName = linkArea.children[0]
+      .getAttribute("href")
+      .replace("#", "");
+    const currentPopup = document.getElementById(popupName);
+    popupOpen(currentPopup);
+  });
 
   if (popupLinks.length > 0) {
     for (let index = 0; index < popupLinks.length; index++) {
@@ -411,7 +445,6 @@
   function bodyLock() {
     const findPaddingValue =
       window.innerWidth - document.querySelector(".wrapper").offsetWidth + "px";
-
     if (lockPadding.length > 0) {
       for (let index = 0; index < lockPadding.length; index++) {
         const el = lockPadding[index];
